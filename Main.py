@@ -1,9 +1,14 @@
+#Bank ATM
+#created by github.com/rajatbhatia1998
+#Account Number : 10 ------------ Password : trial
+
 from tkinter import *
 from tkinter import messagebox
 import sqlite3
 
 
 ARIAL = ("arial",10,"bold")
+
 class Bank:
     def __init__(self,root):
         self.conn = sqlite3.connect("atm_databse.db", timeout=100)
@@ -12,7 +17,7 @@ class Bank:
         self.header = Label(self.root,text="R~R BANK",bg="#50A8B0",fg="white",font=("arial",20,"bold"))
         self.header.pack(fill=X)
         self.frame = Frame(self.root,bg="#728B8E",width=600,height=400)
-
+        #Login Page Form Components
         self.userlabel =Label(self.frame,text="Account Number",bg="#728B8E",fg="white",font=ARIAL)
         self.uentry = Entry(self.frame,bg="honeydew",highlightcolor="#50A8B0",
            highlightthickness=2,
@@ -32,7 +37,7 @@ class Bank:
 
 
         self.frame.pack()
-    def database_fetch(self):
+    def database_fetch(self):#Fetching Account data from database
         self.acc_list = []
         self.temp = self.conn.execute("select name,pass,acc_no,acc_type,bal from atm where acc_no = ? ",(self.ac,))
         for i in self.temp:
@@ -42,7 +47,7 @@ class Bank:
             self.ac = i[2]
             self.acc_list.append("Balance = {}".format(i[4]))
 
-    def verify(self):
+    def verify(self):#verifying of authorised user
         ac = False
         self.temp = self.conn.execute("select name,pass,acc_no,acc_type,bal from atm where acc_no = ? ", (int(self.uentry.get()),))
         for i in self.temp:
@@ -66,7 +71,7 @@ class Bank:
             messagebox._show("Login Info!", m)
 
 
-    def MainMenu(self):
+    def MainMenu(self):#Main App Appears after logined !
         self.frame = Frame(self.root,bg="#728B8E",width=800,height=400)
         root.geometry("800x400")
         self.detail = Button(self.frame,text="Account Details",bg="#50A8B0",fg="white",font=ARIAL,command=self.account_detail)
@@ -133,3 +138,5 @@ icon = PhotoImage(file="icon.png")
 root.tk.call("wm",'iconphoto',root._w,icon)
 obj = Bank(root)
 root.mainloop()
+
+'''If you like this project give a star ,,,,,,Thanks !'''
