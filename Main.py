@@ -1,6 +1,6 @@
 #Bank ATM
 #created by github.com/rajatbhatia1998
-#Account Number : 10 ------------ Password : trial
+#Account Number : 10 -- ---------- Password : trial
 
 from tkinter import *
 from tkinter import messagebox
